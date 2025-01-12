@@ -1,0 +1,154 @@
+%PDF-1.6
+
+% Root
+1 0 obj
+<<
+  /AcroForm <<
+    /Fields 21 0 R
+    /DR <<
+      /Encoding <<
+        /PDFDocEncoding 4 0 R
+      >>
+      /Font <<
+        /Cour 6 0 R
+      >>
+    >>
+  >>
+  /Pages <<
+    /Count 1
+    /Kids [
+      16 0 R
+    ]
+    /Type /Pages
+  >>
+  /OpenAction 17 0 R
+  /Type /Catalog
+>>
+endobj
+
+%% Annots Page 1 (also used as overall fields list)
+21 0 obj
+[
+  100 0 R
+]
+endobj
+
+# Font
+6 0 obj
+<<
+  /Name /Cour
+  /BaseFont /Courier
+  /Encoding (minine)
+  /Subtype /Type1
+  /Type /Font
+>>
+endobj
+
+100 0 obj
+<<
+	/F 4
+	/DA (/Cour 3 Tf 0 g)
+	/FT /Tx
+	/MK <<
+	>>
+	/MaxLen 0
+	/P 16 0 R
+	/Ff 4096
+	/Rect [
+    0
+    0
+    800
+    600
+	]
+	/Subtype /Widget
+	/T (Text1)
+	/V (Foobar...)
+	/Type /Annot
+>>
+endobj
+
+%% Page 1
+16 0 obj
+<<
+  /Annots 21 0 R
+  /Contents << >>
+  /CropBox [
+    0
+    0
+    800
+    600
+  ]
+  /MediaBox [
+    0
+    0
+    800
+    600
+  ]
+  /Parent 7 0 R
+  /Resources <<
+  >>
+  /Rotate 0
+  /Type /Page
+>>
+endobj
+
+17 0 obj
+<<
+  /JS 42 0 R
+  /S /JavaScript
+>>
+endobj
+
+
+42 0 obj
+<< >>
+stream
+
+// Hacky wrapper to work with a callback instead of a string 
+function setInterval(cb, ms) {
+	evalStr = "(" + cb.toString() + ")();";
+	return app.setInterval(evalStr, ms);
+}
+
+var t1 = this.getField("Text1");
+
+var i = 0;
+function changeText() {
+	var payload = (`${i}`.repeat(100) + "\n").repeat(100);
+	t1.value = payload;
+	i++;
+}
+
+setInterval(changeText, 1000);
+
+
+
+
+
+endstream
+endobj
+
+
+18 0 obj
+<<
+  /JS 43 0 R
+  /S /JavaScript
+>>
+endobj
+
+
+43 0 obj
+<< >>
+stream
+
+
+
+endstream
+endobj
+
+trailer
+<<
+  /Root 1 0 R
+>>
+
+%%EOF
