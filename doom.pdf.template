@@ -30,6 +30,7 @@ endobj
 21 0 obj
 [
   100 0 R
+  101 0 R
 ]
 endobj
 
@@ -37,8 +38,7 @@ endobj
 6 0 obj
 <<
   /Name /Cour
-  /BaseFont /Courier
-  /Encoding (minine)
+  /BaseFont /CourierBold
   /Subtype /Type1
   /Type /Font
 >>
@@ -55,15 +55,44 @@ endobj
 	/P 16 0 R
 	/Ff 4096
 	/Rect [
-    0
-    0
-    800
-    600
+    100
+    220
+    690
+    580
 	]
 	/Subtype /Widget
 	/T (Text1)
-	/V (Foobar...)
+	/V (Loading DOOM...)
 	/Type /Annot
+>>
+endobj
+
+101 0 obj
+<<
+  /AA <<
+    /K <<
+      /JS (handle_keystroke\(\);)
+      /S /JavaScript
+    >>
+  >>
+  /F 4
+  /DA (/Cour 12 Tf 0 g)
+  /FT /Tx
+  /MK <<
+  >>
+  /MaxLen 0
+  /P 16 0 R
+  /Ff 0
+  /Rect [
+    250
+    100
+    550
+    200
+  ]
+  /Subtype /Widget
+  /T (Text2)
+  /V (<type here, controls: wasd/j/k/space>)
+  /Type /Annot
 >>
 endobj
 
@@ -104,25 +133,51 @@ endobj
 << >>
 stream
 
-// Hacky wrapper to work with a callback instead of a string 
-function setInterval(cb, ms) {
-	evalStr = "(" + cb.toString() + ")();";
-	return app.setInterval(evalStr, ms);
-}
-
 var t1 = this.getField("Text1");
 
-var i = 0;
-function changeText() {
-	var payload = (`${i}`.repeat(100) + "\n").repeat(100);
-	t1.value = payload;
-	i++;
+var Module = {
+  'print': function(text) { frame_content += text + "\n";},
+  'printErr': function(text) { console.println('stderr: ' + text) }
+};
+
+
+function handle_keystroke() {
+
+var pressKey = Module.cwrap('pressKey', null, ['number']);
+  switch (event.change) {
+    case 'w':
+      pressKey(0xad); // KEY_UPARROW
+      break;
+    case 'a':
+      pressKey(0xac); // KEY_LEFTARROW
+      break;
+    case 's':
+      pressKey(0xaf); // KEY_DOWNARROW
+      break;
+    case 'd':
+      pressKey(0xae); // KEY_RIGHTARROW
+      break;
+    case 'j':
+      pressKey(0xa2); // KEY_USE
+      break;
+    case 'k':
+      pressKey(0xa3); // KEY_FIRE
+      break;
+    case ' ':
+      pressKey(13); // KEY_ENTER
+      break;
+  }
 }
 
-setInterval(changeText, 1000);
+var frame_content = "";
+function draw_frame() {
+  t1.value = frame_content;
+  frame_content = "";
+}
 
 
 
+###JS###
 
 
 endstream

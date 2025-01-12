@@ -1,0 +1,3 @@
+[submodule "doom-ascii-pdf"]
+	path = doom-ascii-pdf
+	url = https://github.com/ThomasRinsma/doom-ascii-pdf
