@@ -1,5 +1,7 @@
 # PDF Doom
 
+Play it here: http://th0mas.nl/downloads/doom.pdf
+
 Only works in PDFium (PDF viewer in Chromium-based browsers) for now.
 
 See also: [PDF Tetris](https://github.com/ThomasRinsma/pdftris).
